@@ -21,7 +21,7 @@ services:
   react:
     build: ./frontend
     ports:
-      - 80:5173
+      - 5173:5173
     volumes:
       - ./frontend/src:/app/src
     depends_on:

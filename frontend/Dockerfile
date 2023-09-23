@@ -1,7 +1,9 @@
 FROM node:16.17
+RUN addgroup react && adduser -S -G react react
+USER react
 WORKDIR /app
-COPY package*.json .
+COPY --chown=react package*.json .
 RUN npm install
-COPY . .
+COPY --chown=react . .
 EXPOSE 5173
 CMD ["npm","run","dev"]
