@@ -6,6 +6,8 @@ services:
     restart: always
     ports:
       - "27018:27017"
+    volumes:
+      - dbmongo:/data/db
   api:
     build: .
     image: img-node-api:1.0
@@ -13,5 +15,10 @@ services:
       - "5000:5000"
     environment:
       MONGOURI : mongodb://db/db_ecommerce
+    volumes:
+      - ./src:/app/src
     depends_on:
       - db
+
+volumes:
+  dbmongo:
