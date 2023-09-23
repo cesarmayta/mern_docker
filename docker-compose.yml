@@ -9,16 +9,23 @@ services:
     volumes:
       - dbmongo:/data/db
   api:
-    build: .
-    image: img-node-api:1.0
+    build: ./backend
     ports:
       - "5000:5000"
     environment:
       MONGOURI : mongodb://db/db_ecommerce
     volumes:
-      - ./src:/app/src
+      - ./backend/src:/app/src
     depends_on:
       - db
+  react:
+    build: ./frontend
+    ports:
+      - 80:5173
+    volumes:
+      - ./frontend/src:/app/src
+    depends_on:
+      - api
 
 volumes:
   dbmongo:
